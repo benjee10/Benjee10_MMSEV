@@ -1,5 +1,5 @@
 PLANETSIDE EXPLORATION VEHICLE
-VERSION 0.1.5 ALPHA DEV VERSION
+VERSION 0.1.6 ALPHA DEV VERSION
 for KERBAL SPACE PROGRAM 1.10.0+
 
 Thanks you for downloading the Planetside Exploration Vehicle, a mod for KSP version 1.10.0+ by Benjee10.
@@ -10,8 +10,15 @@ B9Partswitch is redistributed under its own license.
 
 CHANGELOG
 
+0.1.6 - PRE-RELEASE ALPHA
+- Added length variants of rover chassis, base platform, and base adapter.
+- Added solar array & radiator parts.
+- Added mapped specular variants of MMSEV solar array & base solar array. 
+
 0.1.5 - PRE-RELEASE ALPHA
 - Added 1.875m vertical node part.
+- Added deployable staircase. 
+- Added airlocks/hatches to various parts. 
 
 0.1.4 - PRE-RELEASE ALPHA
 - Added 1.875m base parts.
