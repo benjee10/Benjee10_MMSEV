@@ -1,5 +1,5 @@
 PLANETSIDE EXPLORATION TECHNOLOGIES
-VERSION 0.1.8 ALPHA DEV VERSION
+VERSION 0.1.9 ALPHA DEV VERSION
 for KERBAL SPACE PROGRAM 1.10.0+
 
 Thanks you for downloading Planetside Exploration Technologies, a mod for KSP version 1.10.0+ by Benjee10.
@@ -9,6 +9,11 @@ This is an alpha dev version for testing purposes only. Features may be incomple
 B9Partswitch is redistributed under its own license. 
 
 CHANGELOG
+
+0.1.9 - PRE-RELEASE ALPHA
+- Added 3.75m hab module.
+- Added 1.25m crew tubes in 3 lengths.
+- Added colour coding to solar panel B9 variants. 
 
 0.1.8 - PRE-RELEASE ALPHA
 - Added WIP lander cabin IVA.
