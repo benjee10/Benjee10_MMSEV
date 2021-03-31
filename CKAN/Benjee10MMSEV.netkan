@@ -1,0 +1,34 @@
+{
+  "spec_version"        : "v1.4",
+  "identifier"          : "Benjee10MMSEV",
+  "$kref"               : "#/ckan/github/benjee10/Benjee10_MMSEV",
+  "abstract"            : "Stockalike MMSEV & base building parts",
+  "author"              : "benjee10",
+  "license"             : "restricted",
+  "release_status"      : "stable",
+  "$vref"               : "#/ckan/ksp-avc",
+  "resources": {
+    "homepage": "https://github.com/benjee10/Benjee10_MMSEV",
+    "repository": "https://github.com/benjee10/Benjee10_MMSEV"
+  },
+  "depends": [
+      { "name" : "ModuleManager" },
+      { "name" : "B9PartSwitch" },
+      { "name" : "HabTechProps" },
+      { "name" : "Benjee10sharedAssets" },
+  ],
+  "recommends": [
+      { "name" : "HabTech2" },
+      { "name" : "reDIRECT" },
+      { "name" : "Shuttle-Orbiter-Construction-Kit" },
+      { "name" : "Waterfall" }
+  ],
+  "install" : [
+      { "find" : "Benjee10_MMSEV",
+        "install_to" : "GameData"
+      }
+  ],
+  "tags": [
+      "library"
+]
+}
