@@ -1,13 +1,13 @@
 
 {
-    "NAME":"Benjee10_sharedAssets",
+    "NAME":"Benjee10_MMSEV",
     "URL":"https://raw.githubusercontent.com/benjee10/Benjee10_MMSEV/master/GameData/Benjee10_MMSEV/Version/Benjee10_MMSEV.version",
     "DOWNLOAD":"https://github.com/benjee10/Benjee10_MMSEV/releases",
     "VERSION":
     {
-        "MAJOR":0,
-        "MINOR":1,
-        "PATCH":30,
+        "MAJOR":1,
+        "MINOR":0,
+        "PATCH":0,
         "BUILD":0
     },
     "KSP_VERSION":

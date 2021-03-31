@@ -1,14 +1,24 @@
 PLANETSIDE EXPLORATION TECHNOLOGIES
-VERSION 0.1.30 BETA
-for KERBAL SPACE PROGRAM 1.11.0+
+VERSION 1.0.0
+for KERBAL SPACE PROGRAM 1.11.0+ BREAKING GROUND
 
 Thanks you for downloading Planetside Exploration Technologies, a mod for KSP version 1.11.0+ by Benjee10.
 
-This is an alpha dev version for testing purposes only. Features may be incomplete or broken and future updates may break existing craft or save games. Always backup your files, and use at your own risk. 
+Planetside Exploration Technologies adds a number of parts based on the NASA Multi-Mission Space Exploration Vehicle, as well as an extensive set of modular surface base parts. Additionally, Planetside adds a new type of power source - wind turbines, which can be deployed on atmospheric bodies to generate ElectricCharge. Wind Turbines come in a number of types, specialised for different atmospheric conditions. Difficulty settings are provided for wind power.
 
-B9Partswitch is redistributed under its own license. 
+INSTALLATION
+Place the contents of the included GameData directory in your Kerbal Space Program/GameData directory. 
+If updating this mod, pleases remove any previous versions before installing to prevent compatibility issues. 
+
+DEPENDENCIES
+Planetside requires B9PartSwitch, ModuleManager, HabTechProps, and bundles Benjee10_sharedAssets for additional parts. All of these are bundled with the download. 
+The KSP BREAKING GROUND DLC is required for full functionality. 
 
 CHANGELOG
+
+1.0.0 - PUBLIC RELEASE
+- Added difficulty settings
+- Added TAC LS compatibility patch
 
 0.1.30 - BETA RELEASE
 - Updated Github layout
@@ -108,6 +118,7 @@ CHANGELOG
 Initial release. 
 
 
-Planetside Wind Turbine plugin written by Vali. 
+Planetside Wind Turbine plugin written by ValiZockt. 
+Artwork copyright Benedict Jewer 2020-2021. 
 All rights reserved.
-Artwork copyright Benedict Jewer 2020. 
+B9Partswitch is redistributed under its own license. 

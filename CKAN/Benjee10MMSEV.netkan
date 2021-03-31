@@ -18,10 +18,13 @@
       { "name" : "Benjee10sharedAssets" },
   ],
   "recommends": [
+      { "name" : "Waterfall" }
+  ],
+  "suggests": [
       { "name" : "HabTech2" },
       { "name" : "reDIRECT" },
-      { "name" : "Shuttle-Orbiter-Construction-Kit" },
-      { "name" : "Waterfall" }
+      { "name" : "Shuttle-Orbiter-Construction-Kit" }
+      { "name" : "Benjee10Suits" }
   ],
   "install" : [
       { "find" : "Benjee10_MMSEV",
@@ -29,6 +32,9 @@
       }
   ],
   "tags": [
-      "library"
+      "parts",
+      "plugin",
+      "science",
+      "crewed"
 ]
 }
