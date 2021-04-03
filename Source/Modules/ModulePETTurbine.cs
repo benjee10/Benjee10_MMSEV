@@ -120,7 +120,6 @@ namespace PlanetsideExplorationTechnologies.Modules
         private float turbineSpeed;
         private float efficiencyCurve;
         private float efficiencyAngle;
-        private float trueEfficiencyAngle;
 
         private Vector3Renderer currentOrientationLine;
         private Vector3Renderer windDirectionLine;
@@ -208,7 +207,7 @@ namespace PlanetsideExplorationTechnologies.Modules
                 Events["ForceWindUpdate"].guiActive = false;
 
             UI_Toggle turbineToggle = (UI_Toggle)Fields["isActive"].uiControlFlight;
-            turbineToggle.requireFullControl = DifficultyGeneral.Instance.requireFullControll;
+            turbineToggle.requireFullControl = DifficultyGeneral.Instance.requireFullControl;
 
             if (HighLogic.LoadedSceneIsFlight)
             {
@@ -276,8 +275,8 @@ namespace PlanetsideExplorationTechnologies.Modules
             if (part.WaterContact)
                 return;
          
-            efficiencyAngle = Vector3.Angle(windDirection, hasRotatingPivot ? rotationPivot.forward : turbinePivot.forward);
-            trueEfficiencyAngle = 1 - (Math.Abs(efficiencyAngle) / 180);
+            float angle = Vector3.Angle(windDirection, hasRotatingPivot ? rotationPivot.forward : turbinePivot.forward);
+            efficiencyAngle = 1 - (Math.Abs(angle) / 180);
 
             if (hasRotatingPivot)
             {
@@ -302,8 +301,8 @@ namespace PlanetsideExplorationTechnologies.Modules
 
         private void UpdateTurbine()
         {
-            float localWindSpeed = (float)(vessel.atmDensity * windSpeedMult) * trueEfficiencyAngle;
-
+            float localWindSpeed = (float)(vessel.atmDensity * windSpeedMult) * efficiencyAngle;
+            
             switch (deployState)
             {
                 case DeployState.EXTENDED:
@@ -312,7 +311,7 @@ namespace PlanetsideExplorationTechnologies.Modules
                         if (localWindSpeed < minWindSpeed)
                         {
                             statusDisplay = $"Too little wind to generate power!";
-                            efficiencyCurve = efficiencyAngle = 0.0f;
+                            efficiencyCurve = efficiencyAngle = turbineSpeed = 0.0f;
                             break;
                         }
 
@@ -322,6 +321,8 @@ namespace PlanetsideExplorationTechnologies.Modules
 
                         statusDisplay = $"Generating Power...";
 
+                        Debug.Log($"{turbineSpeed}");
+
                         if (turbineSpeed > maxWindTolerance)
                         {
                             Destroy();
@@ -330,29 +331,26 @@ namespace PlanetsideExplorationTechnologies.Modules
                     }
                     else
                     {
-                        if (localWindSpeed < minWindSpeed)
-                        {
-                            statusDisplay = $"Too little wind to generate power!";
-                            efficiencyCurve = efficiencyAngle = 0.0f;
-                            break;
-                        }
 
                         turbineSpeed = Mathf.Lerp(turbineSpeed, 0, TimeWarp.fixedDeltaTime * spoolUpTime);
-                        efficiencyCurve = Mathf.Lerp(efficiencyCurve, 0, TimeWarp.fixedDeltaTime);
+                        efficiencyCurve = turbineSpeed / (float)vessel.atmDensity * atmEfficiencyCurve.Evaluate((float)vessel.atmDensity);
                         turbinePivot.Rotate(turbinePivotAxis * (TimeWarp.fixedDeltaTime * SPEEDCONST) * turbineSpeed * turbineSpeedMult, Space.Self);
+
+                        if (turbineSpeed < 0.01)
+                            statusDisplay = $"Idling - Not generating power";
                     }
                     break;
                 case DeployState.RETRACTING:
-                    turbineSpeed = Mathf.Lerp(turbineSpeed, 0, (1f - this.anim[this.animationName].normalizedTime) * TimeWarp.fixedDeltaTime);
-                    efficiencyCurve = Mathf.Lerp(efficiencyCurve, 0, (1f - this.anim[this.animationName].normalizedTime) * TimeWarp.fixedDeltaTime);
+                    turbineSpeed = Mathf.Lerp(turbineSpeed, 0, (1f - anim[animationName].normalizedTime) * TimeWarp.fixedDeltaTime);
+                    efficiencyCurve = turbineSpeed / (float)vessel.atmDensity * atmEfficiencyCurve.Evaluate((float)vessel.atmDensity);
                     turbinePivot.Rotate(turbinePivotAxis * (TimeWarp.fixedDeltaTime * SPEEDCONST) * turbineSpeed * turbineSpeedMult, Space.Self);
                     break;
-            }
+            }    
         }
 
         private void UpdateResourceHandler()
         {           
-            resHandler.UpdateModuleResourceOutputs(deployState == DeployState.EXTENDED ? efficiencyCurve * trueEfficiencyAngle : 0);
+            resHandler.UpdateModuleResourceOutputs(deployState == DeployState.EXTENDED ? efficiencyCurve * efficiencyAngle : 0);
         }
 
         public override void Update()
@@ -365,9 +363,8 @@ namespace PlanetsideExplorationTechnologies.Modules
             windDirectionDisplay = Utilities.GetCardinalDirection(windHeading);
             windSpeedDisplay = $"{(float)vessel.atmDensity * windSpeedMult:P1}";
 
-
-            turbineEfficiencyDisplay = $"{(deployState == DeployState.EXTENDED ? efficiencyCurve * trueEfficiencyAngle : 0):P1}";
-            flowRateDisplay = $"{(deployState == DeployState.EXTENDED ? (efficiencyCurve * trueEfficiencyAngle) * chargeRate : 0):N2}";
+            turbineEfficiencyDisplay = $"{(deployState == DeployState.EXTENDED ? efficiencyCurve * efficiencyAngle : 0):P1}";
+            flowRateDisplay = $"{(deployState == DeployState.EXTENDED ? (efficiencyCurve * efficiencyAngle) * chargeRate : 0):N2}";
 
             if (showWindDirection)
             {
