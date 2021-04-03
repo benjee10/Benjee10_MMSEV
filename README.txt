@@ -1,5 +1,5 @@
 PLANETSIDE EXPLORATION TECHNOLOGIES
-VERSION 1.0.0
+VERSION 1.0.1
 for KERBAL SPACE PROGRAM 1.11.0+ BREAKING GROUND
 
 Thanks you for downloading Planetside Exploration Technologies, a mod for KSP version 1.11.0+ by Benjee10.
@@ -15,6 +15,12 @@ Planetside requires B9PartSwitch, ModuleManager, HabTechProps, and bundles Benje
 The KSP BREAKING GROUND DLC is required for full functionality. 
 
 CHANGELOG
+
+1.0.1 - PUBLIC RELEASE
+- Adjusted IVA props
+- Adjusted EC balance
+- Adjusted probe core modules
+- Updated plugin
 
 1.0.0 - PUBLIC RELEASE
 - Added difficulty settings
