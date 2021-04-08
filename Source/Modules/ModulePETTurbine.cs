@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using KSP.Localization;
 
 using PlanetsideExplorationTechnologies.DifficultySettings;
 using PlanetsideExplorationTechnologies.Extensions;
@@ -13,7 +14,7 @@ namespace PlanetsideExplorationTechnologies.Modules
     public class ModulePETTurbine : ModulePETAnimation
     {
         private const string GROUPNAME = "WindTurbine";
-        private const string GROUPNAMEDISPLAY = "Wind Turbine";
+        private const string GROUPNAMEDISPLAY = "#LOC_B10_MMSEV_Turbine_GroupDisplayName";
         private const string MODULENAME = "ModuleDeployableWindTurbine";
         private const int SPEEDCONST = 200;
 
@@ -59,49 +60,49 @@ namespace PlanetsideExplorationTechnologies.Modules
         [KSPField(isPersistant = true)]
         private Quaternion savedRotation = Quaternion.identity;
 
-        [KSPField(isPersistant = true, guiActive = true, guiActiveEditor = false, guiName = "Toggle Turbine", guiActiveUnfocused = false, groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY),
-        UI_Toggle(controlEnabled = true, disabledText = "Off", enabledText = "On", scene = UI_Scene.Flight, requireFullControl = false)]
+        [KSPField(isPersistant = true, guiActive = true, guiActiveEditor = false, guiName = "#LOC_B10_MMSEV_Field_ToggleTurbine", guiActiveUnfocused = false, groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY),
+        UI_Toggle(controlEnabled = true, disabledText = "#LOC_B10_MMSEV_Status_Off", enabledText = "#LOC_B10_MMSEV_Status_On", scene = UI_Scene.Flight, requireFullControl = false)]
         public bool isActive;
 
-        [KSPField(guiActive = true, guiActiveEditor = false, guiName = "EC Output", guiFormat = "N1", guiUnits = " EC/s", guiActiveUnfocused = true, groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY)]
+        [KSPField(guiActive = true, guiActiveEditor = false, guiName = "#LOC_B10_MMSEV_Field_ECOutput", guiFormat = "N1", guiUnits = "#LOC_B10_MMSEV_Field_ECOutput_units", guiActiveUnfocused = true, groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY)]
         public string flowRateDisplay;
 
-        [KSPField(guiActive = true, guiActiveEditor = false, guiName = "Efficiency", guiFormat = "P1", guiActiveUnfocused = true, groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY)]
+        [KSPField(guiActive = true, guiActiveEditor = false, guiName = "#LOC_B10_MMSEV_Field_Efficiency", guiFormat = "P1", guiActiveUnfocused = true, groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY)]
         public string turbineEfficiencyDisplay;
 
-        [KSPField(guiActive = true, guiActiveEditor = false, guiName = "Current Wind Speed", guiFormat = "P1", guiActiveUnfocused = true, groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY)]
+        [KSPField(guiActive = true, guiActiveEditor = false, guiName = "#LOC_B10_MMSEV_Field_CurrentWindSpeed", guiFormat = "P1", guiActiveUnfocused = true, groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY)]
         public string windSpeedDisplay;
 
-        [KSPField(guiActive = true, guiActiveEditor = false, guiName = "Current Wind Direction", guiFormat = "N1", guiActiveUnfocused = true,  groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY)]
+        [KSPField(guiActive = true, guiActiveEditor = false, guiName = "#LOC_B10_MMSEV_Field_CurrentWindDirection", guiFormat = "N1", guiActiveUnfocused = true,  groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY)]
         public string windDirectionDisplay;
 
-        [KSPField(isPersistant = true, guiActive = true, guiActiveEditor = false, guiName = "Show Wind Direction", guiActiveUnfocused = false, groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY),
-        UI_Toggle(controlEnabled = true, disabledText = "Off", enabledText = "On", scene = UI_Scene.Flight, requireFullControl = false)]
+        [KSPField(isPersistant = true, guiActive = true, guiActiveEditor = false, guiName = "#LOC_B10_MMSEV_Field_ShowWindDirection", guiActiveUnfocused = false, groupName = GROUPNAME, groupDisplayName = GROUPNAMEDISPLAY),
+        UI_Toggle(controlEnabled = true, disabledText = "#LOC_B10_MMSEV_Status_Off", enabledText = "#LOC_B10_MMSEV_Status_On", scene = UI_Scene.Flight, requireFullControl = false)]
         public bool toggleLines;
 
-        [KSPEvent(externalToEVAOnly = true, guiName = "Toggle Turbine")]
+        [KSPEvent(externalToEVAOnly = true, guiName = "#LOC_B10_MMSEV_Field_ToggleTurbine")]
         public void ToggleEVATurbine() => ToggleTurbine(null);
 
         // PlanetsideExplorationTechnologies.cfg -> debug = true
-        [KSPEvent(guiActiveEditor = false, guiActive = true, guiName = "Debug: Force Update", guiActiveUnfocused = true)]
+        [KSPEvent(guiActiveEditor = false, guiActive = true, guiName = "#LOC_B10_MMSEV_Event_DebugForceUpdate", guiActiveUnfocused = true)]
         public void ForceWindUpdate()
         {
             PlanetsideExplorationTechnologies.Instance.GenerateWindSpeed();
         }
 
-        [KSPAction(guiName = "Toggle Turbine")]
+        [KSPAction(guiName = "#LOC_B10_MMSEV_Action_ToggleTurbine")]
         public void ToggleTurbine(KSPActionParam param)
         {
             isActive = !isActive;
         }
 
-        [KSPAction(guiName = "Enable Turbine")]
+        [KSPAction(guiName = "#LOC_B10_MMSEV_Action_EnableTurbine")]
         public void EnableTurbine(KSPActionParam param)
         {
             isActive = true;
         }
 
-        [KSPAction(guiName = "Disable Turbine")]
+        [KSPAction(guiName = "#LOC_B10_MMSEV_Action_DisableTurbine")]
         public void DisableTurbine(KSPActionParam param)
         {
             isActive = false;
@@ -129,20 +130,19 @@ namespace PlanetsideExplorationTechnologies.Modules
         {
             string str = string.Empty;
 
-            str += $"Minimum Wind Speed: {minWindSpeed * 100} % \n";
-            str += $"Rated for: max. {maxWindTolerance * 100} % \n";
-
+            str += Localizer.Format("#LOC_B10_MMSEV_Info_MinimumWindSpeed", minWindSpeed * 100) + "\n";
+            str += Localizer.Format("#LOC_B10_MMSEV_Info_RatedForMaxWindTolerance", maxWindTolerance * 100) + "\n";
             if (!string.IsNullOrEmpty(turbineType))
-                str += $"Turbine Type: {turbineType} \n";
+                str += Localizer.Format("#LOC_B10_MMSEV_Info_TurbineType", turbineType) + "\n";
             else if (!string.IsNullOrEmpty(rotationPivotName))
-                str += $"Turbine Type: Tracking \n";
+                str += Localizer.Format("#LOC_B10_MMSEV_Info_TurbineTypeTracking") + "\n";
             else
-                str += $"Turbine Type: Static \n";
+                str += Localizer.Format("#LOC_B10_MMSEV_Info_TurbineTypeStatic") + "\n";
 
             str += $"{resHandler.PrintModuleResources()} \n\n";
 
             if (isBreakable)
-                str += $"<color=orange>Can be repaired with {requiredRepairKits} repair kits";
+                str += "<color=orange>" + Localizer.Format("#LOC_B10_MMSEV_Info_CanBeRepairedWith", requiredRepairKits);
 
             return str;
         }
@@ -150,9 +150,9 @@ namespace PlanetsideExplorationTechnologies.Modules
         public override string GetModuleDisplayName()
         {
             if (!string.IsNullOrEmpty(animationName))
-                return "Deployable Wind Turbine";
+                return Localizer.Format("#LOC_B10_MMSEV_Info_DeployableWindTurbine");
             else
-                return "Wind Turbine";
+                return Localizer.Format("#LOC_B10_MMSEV_Info_WindTurbine");
         }
 
         public override void OnLoad(ConfigNode node)
@@ -214,8 +214,8 @@ namespace PlanetsideExplorationTechnologies.Modules
             {
                 if (showWindDirection)
                 {
-                    windDirectionLine = new Vector3Renderer(part, "windDirection", "Current Wind Direction", ConfigSettings.Instance.windColor);
-                    currentOrientationLine = new Vector3Renderer(part, "currentOrientation", "Current Orientation", ConfigSettings.Instance.orientationColor);
+                    windDirectionLine = new Vector3Renderer(part, "windDirection", Localizer.Format("#LOC_B10_MMSEV_Vector_CurrentWindDirection"), ConfigSettings.Instance.windColor);
+                    currentOrientationLine = new Vector3Renderer(part, "currentOrientation", Localizer.Format("#LOC_B10_MMSEV_Vector_CurrentOrientation"), ConfigSettings.Instance.orientationColor);
                 }
 
                 onAnimationStart.Add(AnimationStart);
@@ -311,7 +311,7 @@ namespace PlanetsideExplorationTechnologies.Modules
                     {
                         if (localWindSpeed < minWindSpeed)
                         {
-                            statusDisplay = $"Too little wind to generate power!";
+                            statusDisplay = Localizer.Format("#LOC_B10_MMSEV_Status_TooLittleWind");
                             efficiencyCurve = efficiencyAngle = 0.0f;
                             break;
                         }
@@ -320,19 +320,19 @@ namespace PlanetsideExplorationTechnologies.Modules
                         efficiencyCurve = turbineSpeed / (float)vessel.atmDensity * atmEfficiencyCurve.Evaluate((float)vessel.atmDensity);
                         turbinePivot.Rotate(turbinePivotAxis * (TimeWarp.fixedDeltaTime * SPEEDCONST) * turbineSpeed * turbineSpeedMult, Space.Self);
 
-                        statusDisplay = $"Generating Power...";
+                        statusDisplay = Localizer.Format("#LOC_B10_MMSEV_Status_GeneratingPower");
 
                         if (turbineSpeed > maxWindTolerance)
                         {
                             Destroy();
-                            ScreenMessage("orange", "Turbine destroyed by excessive wind speed");
+                            ScreenMessage("orange", Localizer.Format("#LOC_B10_MMSEV_Msg_TurbineDestroyedByWind"));
                         }
                     }
                     else
                     {
                         if (localWindSpeed < minWindSpeed)
                         {
-                            statusDisplay = $"Too little wind to generate power!";
+                            statusDisplay = Localizer.Format("#LOC_B10_MMSEV_Status_TooLittleWind");
                             efficiencyCurve = efficiencyAngle = 0.0f;
                             break;
                         }
@@ -367,7 +367,8 @@ namespace PlanetsideExplorationTechnologies.Modules
 
 
             turbineEfficiencyDisplay = $"{(deployState == DeployState.EXTENDED ? efficiencyCurve * trueEfficiencyAngle : 0):P1}";
-            flowRateDisplay = $"{(deployState == DeployState.EXTENDED ? (efficiencyCurve * trueEfficiencyAngle) * chargeRate : 0):N2}";
+            flowRateDisplay = (deployState == DeployState.EXTENDED ? $"{(efficiencyCurve * trueEfficiencyAngle * chargeRate):N2} " : "0 ");
+//            flowRateDisplay = $"{(deployState == DeployState.EXTENDED ? (efficiencyCurve * trueEfficiencyAngle) * chargeRate : 0):N2}";
 
             if (showWindDirection)
             {
