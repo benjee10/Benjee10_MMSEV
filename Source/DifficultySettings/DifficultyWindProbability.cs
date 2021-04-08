@@ -8,8 +8,8 @@ namespace PlanetsideExplorationTechnologies.DifficultySettings
 {
     public class DifficultyWindProbability : GameParameters.CustomParameterNode
     {
-        private const string DISPLAYNAME = "Wind Probability Settings";
-        private const string SECTIONNAME = "Planetside Exploration Technologies";
+        private const string DISPLAYNAME = "#LOC_B10_MMSEV_WindProbabilitySettings_title"; 
+        private const string SECTIONNAME = "#LOC_B10_MMSEV_SettingsSection_title";
 
         public override string Title
         {
@@ -46,16 +46,16 @@ namespace PlanetsideExplorationTechnologies.DifficultySettings
             get { return HighLogic.CurrentGame.Parameters.CustomParams<DifficultyWindProbability>(); }
         }
 
-        [GameParameters.CustomFloatParameterUI("Probability High Winds", toolTip = "Probability for High Winds", asPercentage = true, minValue = 0, maxValue = 1, displayFormat = "F2")]
+        [GameParameters.CustomFloatParameterUI("#LOC_B10_MMSEV_Setting_ProbabilityHighWind_title", toolTip = "#LOC_B10_MMSEV_Setting_ProbabilityHighWind_tooltip", asPercentage = true, minValue = 0, maxValue = 1, displayFormat = "F2")]
         public float probabilityHighWinds = 0.10f;
 
-        [GameParameters.CustomFloatParameterUI("Probability Medium Winds", toolTip = "Probability for Medium Winds", asPercentage = true, minValue = 0, maxValue = 1, displayFormat = "F2")]
+        [GameParameters.CustomFloatParameterUI("#LOC_B10_MMSEV_Setting_ProbabilityMediumWind_title", toolTip = "#LOC_B10_MMSEV_Setting_ProbabilityMediumWind_tooltip", asPercentage = true, minValue = 0, maxValue = 1, displayFormat = "F2")]
         public float probabilityMidWinds = 0.55f;
 
-        [GameParameters.CustomFloatParameterUI("Probability Low Winds", toolTip = "Probability for Low Winds", asPercentage = true, minValue = 0, maxValue = 1, displayFormat = "F2")]
+        [GameParameters.CustomFloatParameterUI("#LOC_B10_MMSEV_Setting_ProbabilityLowWind_title", toolTip = "#LOC_B10_MMSEV_Setting_ProbabilityLowWind_tooltip", asPercentage = true, minValue = 0, maxValue = 1, displayFormat = "F2")]
         public float probabilityLowWinds = 0.25f;
 
-        [GameParameters.CustomFloatParameterUI("Probability No Wind", toolTip = "Probability for No Wind", asPercentage = true, minValue = 0, maxValue = 1, displayFormat = "F2")]
+        [GameParameters.CustomFloatParameterUI("#LOC_B10_MMSEV_Setting_ProbabilityNoWind_title", toolTip = "#LOC_B10_MMSEV_Setting_ProbabilityNoWind_tooltip", asPercentage = true, minValue = 0, maxValue = 1, displayFormat = "F2")]
         public float probabilityNoWinds = 0.15f;
 
 
