@@ -8,8 +8,8 @@ namespace PlanetsideExplorationTechnologies.DifficultySettings
 {
     public class DifficultyGeneral : GameParameters.CustomParameterNode
     {
-        private const string DISPLAYNAME = "General Settings";
-        private const string SECTIONNAME = "Planetside Exploration Technologies";
+        private const string DISPLAYNAME = "#LOC_B10_MMSEV_GeneralSettings_title";
+        private const string SECTIONNAME = "#LOC_B10_MMSEV_SettingsSection_title";
 
         public override string Title
         {
@@ -46,13 +46,13 @@ namespace PlanetsideExplorationTechnologies.DifficultySettings
             get { return HighLogic.CurrentGame.Parameters.CustomParams<DifficultyGeneral>(); }
         }
 
-        [GameParameters.CustomParameterUI("Enable Breakable Turbines", toolTip = "Set to enable breakable turbines through wind")]
+        [GameParameters.CustomParameterUI("#LOC_B10_MMSEV_Setting_BreakableTurbines_title", toolTip = "#LOC_B10_MMSEV_Setting_BreakableTurbines_tooltip")]
         public bool isBreakable = true;
 
-        [GameParameters.CustomParameterUI("Enable Mininimum Wind Speed Requirements", toolTip = "Set to enable minimum wind speed requirements in order for turbines to spin")]
+        [GameParameters.CustomParameterUI("#LOC_B10_MMSEV_Setting_MinWindSpeedRequirements_title", toolTip = "#LOC_B10_MMSEV_Setting_MinWindSpeedRequirements_tooltip")]
         public bool requireMinSpeed = true;
 
-        [GameParameters.CustomParameterUI("Require Full Control", toolTip = "Set to require full probe core control to start and shutdown turbine")]
+        [GameParameters.CustomParameterUI("#LOC_B10_MMSEV_Setting_RequireFullControl_title", toolTip = "#LOC_B10_MMSEV_Setting_RequireFullControl_tooltip")]
         public bool requireFullControll = false;
 
         public override void SetDifficultyPreset(GameParameters.Preset preset)

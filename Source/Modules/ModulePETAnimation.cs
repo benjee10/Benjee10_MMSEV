@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using KSP.Localization;
 
 using PlanetsideExplorationTechnologies.Extensions;
 
@@ -35,8 +36,8 @@ namespace PlanetsideExplorationTechnologies.Modules
         [KSPField(isPersistant = true)]
         public float animationSpeed = 1.0f;
       
-        [KSPField(guiActive = true, guiActiveEditor = true, guiName = "Status")]
-        public string statusDisplay = "Retracted";
+        [KSPField(guiActive = true, guiActiveEditor = true, guiName = "#LOC_B10_MMSEV_Field_Status")]
+        public string statusDisplay = Localizer.Format("#LOC_B10_MMSEV_Status_Retracted");
 
         [KSPField(isPersistant = true)]
         public DeployState deployState = DeployState.RETRACTED;
@@ -44,26 +45,26 @@ namespace PlanetsideExplorationTechnologies.Modules
         [KSPField(isPersistant = true)]
         public float savedAnimationTime = 0f;
 
-        [KSPEvent(active = true, guiActive = true, guiActiveEditor = true, guiName = "Extend")]
+        [KSPEvent(active = true, guiActive = true, guiActiveEditor = true, guiName = "#LOC_B10_MMSEV_Event_Extend")]
         public void ExtendEvent() => Extend();
 
-        [KSPEvent(active = true, guiActive = true, guiActiveEditor = true, guiName = "Retract")]
+        [KSPEvent(active = true, guiActive = true, guiActiveEditor = true, guiName = "#LOC_B10_MMSEV_Event_Retract")]
         public void RetractEvent() => Retract();
 
-        [KSPEvent(externalToEVAOnly = true, guiActive = false, guiActiveUnfocused = true, guiName = "Repair", unfocusedRange = 15f)]
+        [KSPEvent(externalToEVAOnly = true, guiActive = false, guiActiveUnfocused = true, guiName = "#LOC_B10_MMSEV_Event_Repair", unfocusedRange = 15f)]
         public void RepairEvent() => Repair();
 
-        [KSPAction("Toggle Deploy")]
+        [KSPAction("Toggle Deploy", guiName = "#LOC_B10_MMSEV_Action_ToggleDeploy")]
         public void ToggleAction(KSPActionParam param)
         {
             if (deployState == DeployState.RETRACTED) Extend();
             else if (deployState == DeployState.EXTENDED) Retract();
         }
 
-        [KSPAction("Retract")]
+        [KSPAction("Retract", guiName = "#LOC_B10_MMSEV_Action_Retract")]
         public void RetractAction(KSPActionParam param) => Retract();
 
-        [KSPAction("Extend")]
+        [KSPAction("Extend", guiName = "#LOC_B10_MMSEV_Action_Extend")]
         public void ExtendAction(KSPActionParam param) => Extend();
 
         public enum DeployState
@@ -261,11 +262,11 @@ namespace PlanetsideExplorationTechnologies.Modules
                         onAnimationStop.Fire(1f);
                         savedAnimationTime = 1.0f;
                         Events["RetractEvent"].active = true;
-                        statusDisplay = $"Extended";
+                        statusDisplay = Localizer.Format("#LOC_B10_MMSEV_Status_Extended");
                     }
                     else
                     {
-                        statusDisplay = $"Extending...";
+                        statusDisplay = Localizer.Format("#LOC_B10_MMSEV_Status_Extending");
                     }
                     SetDragCubeWeight(1f - anim[animationName].normalizedTime);
                     break;
@@ -279,16 +280,16 @@ namespace PlanetsideExplorationTechnologies.Modules
                         Events["ExtendEvent"].active = true;
                         onAnimationStop.Fire(0f);
                         savedAnimationTime = 0.0f;
-                        statusDisplay = $"Retracted";
+                        statusDisplay = Localizer.Format("#LOC_B10_MMSEV_Status_Retracted");
                     }
                     else
                     {
-                        statusDisplay = $"Retracting...";
+                        statusDisplay = Localizer.Format("#LOC_B10_MMSEV_Status_Retracting");
                     }
                     SetDragCubeWeight(1f - anim[animationName].normalizedTime);
                     break;
                 case DeployState.BROKEN:
-                    statusDisplay = "Broken!";
+                    statusDisplay = Localizer.Format("#LOC_B10_MMSEV_Status_Broken");
                     break;
             }
         }
@@ -321,7 +322,7 @@ namespace PlanetsideExplorationTechnologies.Modules
                 StartFSM();
             }
 
-            ScreenMessage("yellow", $"Turbine repaired with {requiredRepairKits} repair kits");
+            ScreenMessage("yellow", Localizer.Format("#LOC_B10_MMSEV_Msg_TurbineRepaired", requiredRepairKits));
 
             FlightGlobals.ActiveVessel.evaController.ModuleInventoryPartReference.RemoveNPartsFromInventory("evaRepairKit", requiredRepairKits);
             Events["RepairEvent"].active = false;
@@ -337,7 +338,7 @@ namespace PlanetsideExplorationTechnologies.Modules
             if (collision.relativeVelocity.magnitude > impactResistance)
             {
                 Destroy();
-                ScreenMessage("orange", $"Turbine was destroyed");
+                ScreenMessage("orange", Localizer.Format("#LOC_B10_MMSEV_Msg_TurbineDestroyed"));
             }           
         }
 
@@ -375,7 +376,7 @@ namespace PlanetsideExplorationTechnologies.Modules
             }
 
             deployState = DeployState.BROKEN;
-            statusDisplay = $"Broken!";
+            statusDisplay = Localizer.Format("#LOC_B10_MMSEV_Status_Broken");
 
             part.ResetCollisions();
 
